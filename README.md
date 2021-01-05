@@ -5,5 +5,5 @@ PHP Library to implement persistent graph data structures with multiple as stora
 ## Updated features of dbgraph-php
 - Create Graph Objects with custom vertex attributes
 - Store graph objects and all associated data in persistent storage
-- Choose from multiple storage backends (currently MySQL and SQLite are supported).Other backends can be created easily.
+- Choose from multiple storage backends (currently session(serialized form), MySQL and SQLite are supported).Other backends can be created easily.
 - Use some nifty utility tools for Graph Theory related mathematical operations
