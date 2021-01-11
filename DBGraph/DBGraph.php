@@ -26,16 +26,24 @@ class Vertex
 		$this->data = $data;
 	}
 
-	public function getAttribute(string $key){
+	public function getAttribute(string $key)
+	{
 		return $this->data[$key];
 	}
 }
 
 class Edge
 {
-	function __construct(array $data)
+	function __construct(Vertex $vertex_from,Vertex $vertex_to,array $data = [])
 	{
+		$this->vertex_from = $vertex_from;
+		$this->vertex_to = $vertex_to;
 		$this->data = $data;
+	}
+
+	public function edgeData()
+	{
+		return $this->data;
 	}
 }
 
@@ -94,14 +102,8 @@ class Graph
 
 	public function addEdge(Vertex $from,Vertex $to)
 	{
-		$newedge = new Edge(
-			array(
-				"vertex_from" => $from,
-				"vertex_to" => $to
-			)
-		);
-
-		$this->edges[] = $newedge;
+		$newedge = new Edge($from,$to);
+		$this->edges[] =$newedge;
 
 		return $newedge;
 	}
@@ -109,5 +111,17 @@ class Graph
 	public function getNeighbours(Vertex $vertex)
 	{
 		$this->vertices[] = new Vertex($vertexdata);
+	}
+
+
+	// returns degree of a vertex: number of edges connected to that vertex
+	public function vertexDegree(Vertex $vertex)
+	{
+		$degree = 0;
+		foreach ($this->edges as $edge) {
+			if($edge->vertex_to == $vertex || $edge->vertex_from == $vertex)
+				$degree += 1;
+		}
+		return $degree;
 	}
 }
