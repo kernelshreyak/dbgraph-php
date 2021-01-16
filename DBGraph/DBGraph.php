@@ -119,9 +119,22 @@ class Graph
 	{
 		$degree = 0;
 		foreach ($this->edges as $edge) {
-			if($edge->vertex_to == $vertex || $edge->vertex_from == $vertex)
+			if($edge->vertex_from == $vertex)
+				$degree += 1;
+			if($edge->vertex_to == $vertex)
 				$degree += 1;
 		}
 		return $degree;
+	}
+
+	// pretty print the edges of the graph
+	public function printEdges()
+	{
+		$print_str = "";
+		foreach ($this->edges as $edge) {
+			$print_str .= $edge->vertex_from->getAttribute('name')." --> ".$edge->vertex_to->getAttribute('name')."\n";
+		}
+
+		return $print_str;
 	}
 }
